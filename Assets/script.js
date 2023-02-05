@@ -8,7 +8,7 @@ var city;
 var lat;
 var lon;
 
-
+//Main Function: 
 function getCoord() {
     geoCode = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
     console.log(searchBox.value)
@@ -49,10 +49,57 @@ function getCoord() {
                     })
         });
 };
+var d =new Date();
+var weekday =['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
-// fetch(queryURL)
-// .then((response) => response.json())
-// .then((data)=> console.log(data));
+function displayDay(day) {
+    if (day +d.getDay() > 6) {
+        return day +d.getDay() -7;
+    }
+    else {
+        return day +d.getDay();
+    }
+}
 
+for (i=0; i < 6; i++) {
+    document.getElementById('day-'+i+'').textContent = weekday[displayDay(i)];
+}
+//Event Listeners
 searchBtn.addEventListener('click', getCoord)
 
+window.addEventListener('load', () => {
+    var lat;
+    var lon;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            lon = position.coords.longitude;
+            lat = position.coords.latitude;
+            queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat +' &lon=' + lon +'&appid=' + APIKey +'&units=imperial';
+
+            fetch(queryURL)
+                .then(function (response) {
+                    return response.json
+                })
+                .then(function (data) {
+                    newCity.textContent = data.city.name;
+
+                        for (var i = 0; i < 6; i++) {
+                            document.getElementById('temp-'+i+'').textContent ='Temp: ' +Number(data.list[i].main.temp).toFixed(0)+'°';
+                        }
+
+                        for (var i = 0; i < 6; i++) {
+                            document.getElementById('wind-'+i+'').textContent ='Wind: ' +Number(data.list[i].wind.speed).toFixed(0)+' mph';
+                        }
+
+                        for (var i = 0; i < 6; i++) {
+                            document.getElementById('hum-'+i+'').textContent ='Humidity: ' +Number(data.list[i].main.humidity)+'%';
+                        }
+
+                        for (var i = 0; i < 6; i++) {
+                            document.getElementById('icon-'+i+'').src ='http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon+'.png';
+                        }
+                })
+        });
+    }
+})
