@@ -52,6 +52,7 @@ function getCoord() {
 var d =new Date();
 var weekday =['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
+// displays days of the week on the forecast.
 function displayDay(day) {
     if (day +d.getDay() > 6) {
         return day +d.getDay() -7;
@@ -67,6 +68,7 @@ for (i=0; i < 6; i++) {
 //Event Listeners
 searchBtn.addEventListener('click', getCoord)
 
+//Logs weather forecast based on current location
 window.addEventListener('load', () => {
     var lat;
     var lon;
@@ -75,13 +77,14 @@ window.addEventListener('load', () => {
         navigator.geolocation.getCurrentPosition((position) => {
             lon = position.coords.longitude;
             lat = position.coords.latitude;
-            queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat +' &lon=' + lon +'&appid=' + APIKey +'&units=imperial';
+            queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat +'&lon=' + lon +'&appid=' + APIKey +'&units=imperial';
 
             fetch(queryURL)
                 .then(function (response) {
-                    return response.json
+                    return response.json()
                 })
                 .then(function (data) {
+                    console.log(data)
                     newCity.textContent = data.city.name;
 
                         for (var i = 0; i < 6; i++) {
