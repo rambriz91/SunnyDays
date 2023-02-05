@@ -35,3 +35,8 @@ h3 {
 .btn-primary {
     background-color: rgba(7, 7, 93, 0.524);
 }
+
+.weather-icon {
+    max-width: 100px;
+    min-height: 100px;
+}
