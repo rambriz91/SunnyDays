@@ -1,8 +1,23 @@
 var APIKey = '94f1fc415316d4290d1bcf565d7ea27a'; 
-var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=94f1fc415316d4290d1bcf565d7ea27a'
+var queryURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat +' &lon=' + long +'&appid=' + APIKey +'&units=imperial';
+var geoCode = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchBox +'&limit=1&appid=' + APIKey +'';
+var searchBox = document.getElementById('search').value;
+var newCity = document.getElementById('city');
 
 var city;
 
-fetch(queryURL)
+function getCoord() {
+    fetch(geoCode)
 .then((response) => response.json())
-.then((data)=> console.log(data));
+.then((data)=> console.log(data) 
+    // var lon = data.lon.value;
+    // var lat = data.lat.value
+);
+};
+
+// fetch(queryURL)
+// .then((response) => response.json())
+// .then((data)=> console.log(data));
+
+searchBox.addEventListener('click', getCoord)
+
