@@ -16,13 +16,13 @@
             <!-- Form Search Div  -->
             <div class="col-3">
                 <h2 class="text-center">Search for a City:</h2>
-                <input name="City Search" id="search" type="text" placeholder="San Diego" class="form-control m-2 text-center">
+                <input name="City Search" id="search" type="text" placeholder="Current Location" class="form-control m-2 text-center">
                 <button id="search-btn" type="submit" class="btn btn-primary m-2 col-12">Search</button>
             </div>
             <!-- Display API Info -->
             <div class="col-9 col-md-9 row">
                 <!-- Today's Weather  -->
-                <div class="col-12 p-4 mb-2 mt-3 today">
+                <div class="col p-4 mb-2 today">
                     <h2 class="mb-3" id="city">City</h2>
                     <h3 id="day-0">Day</h3>
                     <img src="" alt="" class="weather-icon" id="icon-0">
@@ -73,6 +73,7 @@
 
             </div>
         </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="./Assets/script.js"></script>
 </body>
 </html>
