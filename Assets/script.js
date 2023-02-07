@@ -27,7 +27,7 @@ function getCoord() {
                     console.log(data)
                     newCity.textContent = data.city.name;
                     console.log(newCity)
-                    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + newCity + "')"
+                    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?landscape?" + newCity + "')"
 
                     for (var i = 0; i < 6; i++) {
                         document.getElementById('temp-' + i + '').textContent = 'Temp: ' + Number(data.list[i].main.temp).toFixed(0) + '°';
