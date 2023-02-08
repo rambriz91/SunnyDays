@@ -2,9 +2,11 @@ var APIKey = '94f1fc415316d4290d1bcf565d7ea27a';
 var searchBox = document.getElementById('search');
 var newCity = document.getElementById('city');
 var searchBtn = document.getElementById('search-btn');
-
+var searchHistory = [];
+var btnHolder = document.getElementById('btn-holder')
 
 //Main Function: 
+load()
 function getCoord() {
     geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
     console.log(searchBox.value)
@@ -47,6 +49,7 @@ function getCoord() {
 
                 })
         });
+    handleHistory()
 };
 //Displays days of the week on the forecast
 
@@ -104,3 +107,27 @@ window.addEventListener('load', () => {
         });
     }
 })
+
+function handleHistory(event) {
+    if (!searchBox.value) {
+        return;
+    }
+
+    searchHistory.push(searchBox.value);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+};
+
+function load() {
+    var loadHistory = localStorage.getItem('searchHistory')
+    if (loadHistory == null) {
+        return;
+    };
+
+var cityButtonArr = JSON.parse(loadHistory)
+for (var i = 0; i < cityButtonArr.length; i++) {
+    var dynBtn = document.createElement('button');
+    dynBtn.classList.add('dyn-btn')
+    dynBtn.textContent = cityButtonArr[i]
+    btnHolder.append(dynBtn);
+}
+};

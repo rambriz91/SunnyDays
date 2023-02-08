@@ -40,3 +40,9 @@ h3 {
     max-width: 100px;
     min-height: 100px;
 }
+
+.dyn-btn {
+    background-color: rgba(8, 8, 216, 0.524);
+    width: 200px;
+    color: white;
+}
