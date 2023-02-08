@@ -6,7 +6,7 @@ var searchBtn = document.getElementById('search-btn');
 
 //Main Function: 
 function getCoord() {
-    geoCode = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
+    geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
     console.log(searchBox.value)
     fetch(geoCode)
         .then(function (response) {
