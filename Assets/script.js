@@ -42,7 +42,7 @@ function getCoord() {
                     }
 
                     for (var i = 0; i < 6; i++) {
-                        document.getElementById('icon-' + i + '').src = 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '.png';
+                        document.getElementById('icon-' + i + '').src = 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '.png';
                     }
 
                 })
@@ -98,7 +98,7 @@ window.addEventListener('load', () => {
                     }
 
                     for (var i = 0; i < 6; i++) {
-                        document.getElementById('icon-' + i + '').src = 'http://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '.png';
+                        document.getElementById('icon-' + i + '').src = 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '.png';
                     }
                 })
         });
