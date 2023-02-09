@@ -61,7 +61,7 @@ function getCoord() {
 
                 })
         });
-    handleHistory()
+    // handleHistory()
 };
 //Displays days of the week on the forecast
 
