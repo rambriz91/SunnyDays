@@ -11,8 +11,14 @@ load()
 function getCoord() {
     if(!cityName) {
         geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
+        var dynBtn = document.createElement('button');
+        dynBtn.classList.add('dyn-btn')
+        dynBtn.textContent = searchBox.value
+        btnHolder.append(dynBtn);
+        handleHistory(searchBox.value)
     }else {
             geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIKey + '';
+            handleHistory(cityName)
         }
     cityName = ''
     console.log(searchBox.value)
@@ -114,18 +120,14 @@ window.addEventListener('load', () => {
     }
 })
 
+// Sets user search into local storage.
 function handleHistory(event) {
     if (!searchBox.value) {
         return;
-    }
-
-    searchHistory.push(searchBox.value);
+    };    
+    searchHistory.push(event);
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 
-    var dynBtn = document.createElement('button');
-    dynBtn.classList.add('dyn-btn')
-    dynBtn.textContent = searchBox.value
-    btnHolder.append(dynBtn);
 };
 
 function load() {
@@ -135,6 +137,7 @@ function load() {
     };
 
 var cityButtonArr = JSON.parse(loadHistory)
+console.log(cityButtonArr)
 for (var i = 0; i < cityButtonArr.length; i++) {
     var dynBtn = document.createElement('button');
     dynBtn.classList.add('dyn-btn')
