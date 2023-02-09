@@ -3,12 +3,18 @@ var searchBox = document.getElementById('search');
 var newCity = document.getElementById('city');
 var searchBtn = document.getElementById('search-btn');
 var searchHistory = [];
-var btnHolder = document.getElementById('btn-holder')
+var btnHolder = document.getElementById('btn-holder');
+var cityName;
 
 //Main Function: 
 load()
 function getCoord() {
-    geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
+    if(!cityName) {
+        geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchBox.value + '&limit=1&appid=' + APIKey + '';
+    }else {
+            geoCode = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + APIKey + '';
+        }
+    cityName = ''
     console.log(searchBox.value)
     fetch(geoCode)
         .then(function (response) {
@@ -115,6 +121,11 @@ function handleHistory(event) {
 
     searchHistory.push(searchBox.value);
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+
+    var dynBtn = document.createElement('button');
+    dynBtn.classList.add('dyn-btn')
+    dynBtn.textContent = searchBox.value
+    btnHolder.append(dynBtn);
 };
 
 function load() {
@@ -131,3 +142,9 @@ for (var i = 0; i < cityButtonArr.length; i++) {
     btnHolder.append(dynBtn);
 }
 };
+
+btnHolder.addEventListener('click', (event)=> {
+    cityName = event.target.textContent;
+    getCoord()
+}) 
+
